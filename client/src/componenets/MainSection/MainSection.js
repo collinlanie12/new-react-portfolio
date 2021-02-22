@@ -18,6 +18,7 @@ function MainSection() {
                         <li><a href="https://github.com/collinlanie12" className="icon brands fa-github">Github</a></li>
                         <li><a href="https://www.instagram.com/collin2chill/" className="icon brands fa-instagram">Instagram</a></li>
                         <li><a href="https://www.linkedin.com/in/collin-lanier-a32762169/" className="icon brands fa-linkedin-in">Linkedin</a></li>
+                        <li><a href="images/updatedresume.pdf" className="icon brands fa-readme">Resume</a></li>
                     </ul>
                 </footer>
             </section>

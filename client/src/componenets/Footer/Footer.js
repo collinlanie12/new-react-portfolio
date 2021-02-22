@@ -8,7 +8,7 @@ function Footer() {
         <div>
             <footer id="footer">
                 <ul className="copyright">
-                    <li id="copyName">&copy; Collin Lanier</li>
+                    <li id="copyName">&copy; Collin Lanier 2021</li>
                 </ul>
             </footer>
         </div>
