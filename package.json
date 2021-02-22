@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "my portfolio made with react and node express",
   "main": "server/server.js",
+  "homepage": "https://collinlanie12.github.io/new-react-portfolio/",
   "scripts": {
     "predeploy": "cd client && yarn build",
-    "deploy": "gh-pages -d build",
+    "deploy": "cd client && gh-pages -d build",
     "install": "yarn run install:client && yarn run install:server",
     "install:client": "cd client && yarn",
     "install:server": "cd server && yarn",

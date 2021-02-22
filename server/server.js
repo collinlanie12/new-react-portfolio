@@ -4,6 +4,18 @@ var router = express.Router();
 var nodemailer = require('nodemailer');
 var cors = require('cors');
 
+//-- Static Server (Production) ----------------------------------------------
+if (process.env.NODE_ENV === 'production') {
+    const clientBuildPath = path.join(__dirname, '..', 'client', 'build');
+    console.log(`Client build path: ${clientBuildPath}\n`);
+    app.use(express.static(clientBuildPath));
+}
+
+//-- React catch-all ---------------------------------------------------------
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/public/index.html'));
+});
+
 var transport = {
     host: 'smtp.gmail.com',
     port: 465,
