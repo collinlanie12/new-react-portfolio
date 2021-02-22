@@ -1,15 +1,15 @@
-//require('dotenv').config();
+require('dotenv').config();
 var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
 var cors = require('cors');
 
 var transport = {
-    host: 'smtp.mailtrap.io',
-    port: 2525,
+    host: 'smtp.gmail.com',
+    port: 465,
     auth: {
-        user: "4483845ac5370c",
-        pass: "07a1c116399ced"
+        user: process.env.ADMIN_EMAIL_USERNAME,
+        pass: process.env.ADMIN_EMAIL_PASSWORD
     }
 }
 
