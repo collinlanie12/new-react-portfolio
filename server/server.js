@@ -63,7 +63,7 @@ const LOG_MODE = process.env.NODE_ENV === 'production' ? 'common' : 'dev';
 if (process.env.NODE_ENV === 'production') {
     const clientBuildPath = path.join(__dirname, '..', 'client', 'build');
     console.log(`Client build path: ${clientBuildPath}\n`);
-    app.use(express.static(clientBuildPath));
+    app.use('/static', express.static(clientBuildPath));
 }
 
 //-- React catch-all ---------------------------------------------------------
