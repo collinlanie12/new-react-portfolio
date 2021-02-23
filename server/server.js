@@ -1,20 +1,15 @@
-require('dotenv').config();
+const path = require('path');
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config({
+        path: path.resolve(__dirname, '.env')
+    });
+}
+
 var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
 var cors = require('cors');
 
-//-- Static Server (Production) ----------------------------------------------
-if (process.env.NODE_ENV === 'production') {
-    const clientBuildPath = path.join(__dirname, '..', 'client', 'build');
-    console.log(`Client build path: ${clientBuildPath}\n`);
-    app.use(express.static(clientBuildPath));
-}
-
-//-- React catch-all ---------------------------------------------------------
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/public/index.html'));
-});
 
 var transport = {
     host: 'smtp.gmail.com',
@@ -60,7 +55,26 @@ router.post('/api/contact/mailMe', (req, res, next) => {
 })
 
 const app = express();
+
+const PORT = process.env.PORT || 3001;
+const LOG_MODE = process.env.NODE_ENV === 'production' ? 'common' : 'dev';
+
+//-- Static Server (Production) ----------------------------------------------
+if (process.env.NODE_ENV === 'production') {
+    const clientBuildPath = path.join(__dirname, '..', 'client', 'build');
+    console.log(`Client build path: ${clientBuildPath}\n`);
+    app.use(express.static(clientBuildPath));
+}
+
+//-- React catch-all ---------------------------------------------------------
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/public/index.html'));
+});
+
 app.use(cors());
 app.use(express.json());
 app.use('/', router);
-app.listen(3001);
+
+app.listen(PORT, () => {
+    console.log(`Server is up on port ${PORT}!`);
+});
