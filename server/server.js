@@ -9,6 +9,7 @@ var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
 var cors = require('cors');
+const logger = require('morgan');
 
 
 var transport = {
@@ -59,11 +60,13 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const LOG_MODE = process.env.NODE_ENV === 'production' ? 'common' : 'dev';
 
+app.use(logger(LOG_MODE));
+
 //-- Static Server (Production) ----------------------------------------------
 if (process.env.NODE_ENV === 'production') {
     const clientBuildPath = path.join(__dirname, '..', 'client', 'build');
     console.log(`Client build path: ${clientBuildPath}\n`);
-    app.use('/static', express.static(clientBuildPath));
+    app.use(express.static(clientBuildPath));
 }
 
 //-- React catch-all ---------------------------------------------------------
