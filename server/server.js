@@ -67,7 +67,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 //-- React catch-all ---------------------------------------------------------
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
