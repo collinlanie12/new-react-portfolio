@@ -11,39 +11,69 @@ function ContactForm() {
     function handleSubmit(e) {
         e.preventDefault();
 
-        API.Contact.mailMe(name, email, message)
-            .then(response => {
-                if (response.data.status === 'success') {
-                    resetForm();
-                    store.addNotification({
-                        title: "Message Sent!",
-                        message: "I will contact you shortly.",
-                        type: "success",
-                        insert: "top",
-                        container: "bottom-right",
-                        animationIn: ["animate__animated", "animate__fadeIn"],
-                        animationOut: ["animate__animated", "animate__fadeOut"],
-                        dismiss: {
-                            duration: 5000,
-                            onScreen: true
-                        }
-                    });
-                } else if (response.data.status === 'fail') {
-                    store.addNotification({
-                        title: "Message did not send...",
-                        message: "Try again later.",
-                        type: "danger",
-                        insert: "top",
-                        container: "bottom-right",
-                        animationIn: ["animate__animated", "animate__fadeIn"],
-                        animationOut: ["animate__animated", "animate__fadeOut"],
-                        dismiss: {
-                            duration: 5000,
-                            onScreen: true
-                        }
-                    });
+        if (name === "" || email === "" || message === "") {
+            store.addNotification({
+                title: "Insufficient Information!",
+                message: "Missing name, email, or password.",
+                type: "warning",
+                insert: "top",
+                container: "bottom-right",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                dismiss: {
+                    duration: 5000,
+                    onScreen: true
                 }
             });
+        } else if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
+            store.addNotification({
+                title: "Invalid Email!",
+                message: "Make sure that is your correct email address.",
+                type: "warning",
+                insert: "top",
+                container: "bottom-right",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                dismiss: {
+                    duration: 5000,
+                    onScreen: true
+                }
+            });
+        } else {
+            API.Contact.mailMe(name, email, message)
+                .then(response => {
+                    if (response.data.status === 'success') {
+                        resetForm();
+                        store.addNotification({
+                            title: "Message Sent!",
+                            message: "I will contact you shortly.",
+                            type: "success",
+                            insert: "top",
+                            container: "bottom-right",
+                            animationIn: ["animate__animated", "animate__fadeIn"],
+                            animationOut: ["animate__animated", "animate__fadeOut"],
+                            dismiss: {
+                                duration: 5000,
+                                onScreen: true
+                            }
+                        });
+                    } else if (response.data.status === 'fail') {
+                        store.addNotification({
+                            title: "Message did not send...",
+                            message: "Try again later.",
+                            type: "danger",
+                            insert: "top",
+                            container: "bottom-right",
+                            animationIn: ["animate__animated", "animate__fadeIn"],
+                            animationOut: ["animate__animated", "animate__fadeOut"],
+                            dismiss: {
+                                duration: 5000,
+                                onScreen: true
+                            }
+                        });
+                    }
+                });
+        }
     }
 
     function resetForm() {
