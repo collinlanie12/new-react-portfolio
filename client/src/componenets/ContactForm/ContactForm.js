@@ -14,7 +14,7 @@ function ContactForm() {
         if (name === "" || email === "" || message === "") {
             store.addNotification({
                 title: "Insufficient Information!",
-                message: "Missing name, email, or password.",
+                message: "Missing name, email, or message.",
                 type: "warning",
                 insert: "top",
                 container: "bottom-right",
