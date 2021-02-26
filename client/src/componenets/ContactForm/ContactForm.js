@@ -26,20 +26,6 @@ function ContactForm() {
                 }
             });
         } else if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
-            store.addNotification({
-                title: "Invalid Email!",
-                message: "Make sure that is your correct email address.",
-                type: "warning",
-                insert: "top",
-                container: "bottom-right",
-                animationIn: ["animate__animated", "animate__fadeIn"],
-                animationOut: ["animate__animated", "animate__fadeOut"],
-                dismiss: {
-                    duration: 5000,
-                    onScreen: true
-                }
-            });
-        } else {
             API.Contact.mailMe(name, email, message)
                 .then(response => {
                     if (response.data.status === 'success') {
