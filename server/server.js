@@ -13,14 +13,15 @@ const logger = require('morgan');
 
 
 var transport = {
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+    // host: 'smtp.gmail.com',
+    // port: 465,
+    // secure: true,
+    service: 'gmail',
     auth: {
         user: process.env.ADMIN_EMAIL_USERNAME,
         pass: process.env.ADMIN_EMAIL_PASSWORD
     }
-}
+};
 
 var transporter = nodemailer.createTransport(transport);
 
